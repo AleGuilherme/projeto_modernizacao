@@ -1,11 +1,17 @@
 package br.com.isidrocorp.modernizacao.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity // defino que a classe usuário é armazenável em banco
 @Table(name = "itmn_usuario") // e que está relacionada à tabela de nome itmn_usuario
@@ -30,6 +36,10 @@ public class Usuario {
 
 	@Column(name = "link_foto", length = 255)
 	private String linkFoto;
+	
+	@OneToMany(mappedBy = "teamLeader", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("teamLeader")
+	private List<Comunidade> comunidades;
 
 	public int getId() {
 		return id;
@@ -77,6 +87,14 @@ public class Usuario {
 
 	public void setLinkFoto(String linkFoto) {
 		this.linkFoto = linkFoto;
+	}
+
+	public List<Comunidade> getComunidades() {
+		return comunidades;
+	}
+
+	public void setComunidades(List<Comunidade> comunidades) {
+		this.comunidades = comunidades;
 	}
 
 }
