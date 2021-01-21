@@ -40,6 +40,7 @@ public class Usuario {
 	@OneToMany(mappedBy = "teamLeader", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("teamLeader")
 	private List<Comunidade> comunidades;
+	
 
 	public int getId() {
 		return id;
